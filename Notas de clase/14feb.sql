@@ -2,7 +2,7 @@
 
 -- EMPEZAMOS COM DML (DATA MANIPULATION LANGUAGE)
 
--- SEQUENCE
+-- * SEQUENCE
 
 CREATE TABLE prod_seq_nuevos (
     cod_prod NUMBER(5) PRIMARY KEY,
@@ -14,7 +14,7 @@ CREATE TABLE prod_seq_viejos(
     nombre VARCHAR2(30)
 );
 
--- las secuencias se usan para nombrar campos que van en un rango determinado de valores
+--  las secuencias se usan para nombrar campos que van en un rango determinado de valores
 CREATE SEQUENCE seq_prod
 START WITH 1
 INCREMENT BY 1; -- se va incrementando de 1 en 1
@@ -67,7 +67,7 @@ UPDATE prod_nuevos SET (nombre = 'camiseta', descripcion = 'Descripción de cami
 WHERE LOWER (nombre LIKE 'camisa'); -- cambiamos camisa por camiseta
 
 ------------------------------------------------------------------------------------------------------
--- DELETE
+-- * DELETE
 -- borra filas enteras
 
 DELETE FROM prod_nuevos; -- elimina todas las filas insertadas anteriormente
@@ -77,7 +77,7 @@ DELETE FROM prod_nuevos WHERE LOWER (nombre LIKE 'camisa' OR nombre LIKE 'pantal
 ------------------------------------------------------------------------------------------------------
 -- se crea un usuario llamado EDITORIALES
 
--- esta parte la ha dado ella (es un script que esta en el campus virtual)
+-- ! esta parte la ha dado ella (es un script que esta en el campus virtual)
 CREATE TABLE EDITORIAL (
     CODIGO NUMBER(3) PRIMARY KEY, 
     NOMBRE VARCHAR2(30)
@@ -107,10 +107,10 @@ insert into libros values(105,'El aleph','Borges',2,10);
 insert into libros values(106,'Antología','Borges',1,20);
 insert into libros values(107,'Cervantes y el quijote','Borges',3,25);
 insert into libros values(108,'Tres','Richard Bach',1,40);
--- hasta aquí
+-- ! hasta aquí
 
 ------------------------------------------------------------------------------------
--- SELECT
+-- * SELECT
 
 SELECT * FROM LIBROS; -- el asterisco es que coge todas las columnas de la tabla
 
