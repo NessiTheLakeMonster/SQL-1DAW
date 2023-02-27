@@ -1,4 +1,4 @@
--- 17 Febrero
+-- * 17 Febrero
 
 ----------------------
 CREATE TABLE Primer_plato (
@@ -34,7 +34,7 @@ INSERT INTO Postre VALUES (4, 'helado', 12);
 INSERT INTO Postre VALUES (4, 'helado', 12);
 ----------------------
 
--- SELECTS
+-- * SELECTS
 
 -- Seleccionar todos los campos de una tabla
 
@@ -84,7 +84,7 @@ SELECT APELLIDO, FECHA_ALT, SALARIO FROM EMPLE;
 
 SELECT DEPT_NO, LOC FROM DEPART;
 
--- ORDENAR CAMPOS EN SELECT
+-- * ORDENAR CAMPOS EN SELECT
 
 SELECT apellido, oficio, salario FROM Emple; -- Desordenado
 SELECT apellido, oficio, salario FROM Emple ORDER BY oficio; -- Se ordenan todos los oficios.
@@ -95,7 +95,7 @@ SELECT apellido, oficio, salario FROM Emple ORDER BY oficio DESC, salario DESC; 
 SELECT apellido, fecha_alt, salario FROM EMPLE ORDER BY apellido DESC;
 SELECT oficio, apellido, fecha_alt, salario FROM EMPLE ORDER BY oficio, apellido DESC;
 
--- Uso del WHERE
+-- * Uso del WHERE
 
 SELECT apellido, fecha_alt, salario FROM EMPLE WHERE LOWER(oficio) LIKE 'vendedor' ORDER BY apellido;
 
