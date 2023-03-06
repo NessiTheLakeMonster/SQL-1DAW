@@ -32,10 +32,9 @@
 /* A partir de la tabla EMPLE, obten el apellido, salario y depto_no
 de los empleados cuyo salario sea mayor de 2000 en los departamentos 10 o 20 */
 SELECT APELLIDO, SALARIO, DEPT_NO
-FROM EMPLE (
+FROM EMPLE 
     WHERE SALARIO > 2000 
-    AND (DEPT_NO = 10 OR DEPT_NO = 20)
-);
+    AND (DEPT_NO = 10 OR DEPT_NO = 20);
 
 ----------------------------------------------------------------------------
 -- * Uso de los COMODINES
