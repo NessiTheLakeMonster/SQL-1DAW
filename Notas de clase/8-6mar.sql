@@ -130,9 +130,9 @@ FROM AL_FUTUROS
     insert into libros values(106,'Antología','Borges',1,20);
     insert into libros values(107,'Cervantes y el quijote','Borges',3,25);
     insert into libros values(108,'Tres','Richard Bach',1,40);
--- ! FIN DEL SCRIPT
+-- ! FIN DEL SCRIPT-------
 
-------------------------------------------------------------------------------
+-----------------------------------------------------------------------
 -- listado de todos los libros de la editorial que tiene el libro más caro
 SELECT COD_EDIT 
 FROM LIBROS
