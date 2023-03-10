@@ -220,10 +220,17 @@ SELECT NOMBRE, PRECIO
 FROM COSMETICO
 
 --? 14. Saca un listado de los teléfonos de todas las clientas que se llamen ‘ANA’. (Deben salir 4).
+SELECT TFNO 
+FROM CLIENTE
+    WHERE UPPER(NOMBRE) LIKE 'ANA'; --! COMPROBAR
 
 --? 15. Saca la media de los precios de los cosméticos
+SELECT ABS(PRECIO) FROM COSMETICO; --! COMPROBAR
 
 --? 16. Saca la media de los precios de los cosméticos cuyo código comienza por ‘C’.
+SELECT ABS(PRECIO)
+FROM COSMETICO
+    WHERE UPPER(NOMBRE) LIKE 'C%'; --! COMPROBAR
 
 --? 17. Saca un listado de NOMBRE y PRECIO de aquellos cosméticos que en su NOMBRE incluyan ‘ANTI’.
 

@@ -54,7 +54,7 @@
     INSERT INTO SERVICIO VALUES('M_PIE', 'Masaje piernas', 25);
     INSERT INTO SERVICIO VALUES('M_FAC', 'Masaje facial', 20);
 
-    --Tabla de cosm�tico
+    --Tabla de cosmético
     CREATE TABLE COSMETICO(
         COD VARCHAR2(10) PRIMARY KEY,
         NOMBRE VARCHAR2(30),
@@ -166,4 +166,3 @@
 
 -------------------------------------------------------------------------------------------
  --? 1. Saca un listado de los NOMBRES de los clientes que han comprado cosméticos, ordena alfabéticamente.
- 
