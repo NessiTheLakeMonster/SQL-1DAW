@@ -1,4 +1,4 @@
--- * ACT5
+-- * ACT6
 
 -- ! Script aula virtual
     DROP TABLE TRATAMIENTO;
@@ -165,71 +165,5 @@
 -- ! Fin del script
 
 -------------------------------------------------------------------------------------------
---? 1. Consulta todos los datos de los EMPLEADOS de la peluquería.
-SELECT * FROM EMPLEADO;
-
---? 2. Consulta el NOMBRE y la ESPECIALIDAD de los EMPLEADOS de la peluquería.
-SELECT NOMBRE, ESPECIALIDAD FROM EMPLEADO;
-
---? 3. Consulta la DESCRIPCIÓN de los servicios que se ofrecen en la peluquería junto a sus precios.
-SELECT DESCRIPCION, PRECIO FROM SERVICIO;
-
---? 4. Cuenta el número de distintos servicios que ofrece nuestra peluquería.
-SELECT COUNT(*) FROM SERVICIO;
-
---? 5. Cuenta el número total de empleados que tiene nuestra peluquería.
-SELECT COUNT(*) FROM EMPLEADO;
-
---? 6. Saca un listado de todos los datos de los cosméticos que se venden en nuestra peluquería.
-SELECT * FROM COSMETICO;
-
---? 7. Saca un listado del NOMBRE del cosmético junto con su PRECIO.
-SELECT NOMBRE, PRECIO FROM COSMETICO;
-
---? 8. Saca un listado del COSMÉTICO/OS más barato.
-SELECT * 
-FROM COSMETICO 
-    WHERE PRECIO = (SELECT MIN(PRECIO) FROM COSMETICO);
-
---? 9. Saca un listado del COSMÉTICO/OS más caro.
-SELECT * 
-FROM COSMETICO 
-    WHERE PRECIO = (SELECT MAX(PRECIO) FROM COSMETICO);
-
---? 10. Saca un listado de los nombres y teléfonos de todas aquellas clientas
---?  que sean ‘ENFERMERA’ O ‘enfermera’. (Cuidado con las mayúsculas o minúsculas).
-SELECT NOMBRE, TFNO 
-FROM CLIENTE
-    WHERE UPPER(PROFESION) LIKE 'ENFERMERA';
-
---? 11. Saca un listado de los nombres y teléfonos de todos aquellos clientes que 
---? sean ‘ENFERMERO’, ‘ENFERMERA’, ‘enfermero’, ‘enfermera’. (Trabaja con el comodín y con UPPER o LOWER).
-SELECT NOMBRE, TFNO
-FROM CLIENTE
-    WHERE UPPER(PROFESION) IN ('ENFERMERO','ENFERMERA');
-
---? 12. Saca un listado de los NOMBRES y PRECIO de los cosméticos cuyo precio sea inferior a 20.
-SELECT NOMBRE, PRECIO
-FROM COSMETICO
-    WHERE PRECIO < 20;
-
---? 13. Saca un listado de los distintos tipos de TINTE que ofrecemos en la peluquería 
---? junto a su precio, ordena por NOMBRE. (Usa comodín correctamente, la palabra TINTE 
---? no sabemos en que posición se encuentra dentro del nombre).
-SELECT NOMBRE, PRECIO
-FROM COSMETICO
-
---? 14. Saca un listado de los teléfonos de todas las clientas que se llamen ‘ANA’. (Deben salir 4).
-
---? 15. Saca la media de los precios de los cosméticos
-
---? 16. Saca la media de los precios de los cosméticos cuyo código comienza por ‘C’.
-
---? 17. Saca un listado de NOMBRE y PRECIO de aquellos cosméticos que en su NOMBRE incluyan ‘ANTI’.
-
---? 18. Dime el total de dinero de las VENTAS que se ha invertido en COMISIONES.
-
---? 19. Cuenta el número de VENTAS que han tenido COMISIÓN.
-
---? 20. Saca un listado de COSMÉTICOS con el 20% de descuento en todos ellos. 
---?     Debes mostrar el NOMBRE, PRECIO, PRECIO20% de descuento.
+ --? 1. Saca un listado de los NOMBRES de los clientes que han comprado cosméticos, ordena alfabéticamente.
+ 
