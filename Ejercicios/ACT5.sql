@@ -222,21 +222,29 @@ FROM COSMETICO
 --? 14. Saca un listado de los teléfonos de todas las clientas que se llamen ‘ANA’. (Deben salir 4).
 SELECT TFNO 
 FROM CLIENTE
-    WHERE UPPER(NOMBRE) LIKE 'ANA'; --! COMPROBAR
+    WHERE UPPER(NOMBRE) LIKE 'ANA'; 
 
 --? 15. Saca la media de los precios de los cosméticos
-SELECT ABS(PRECIO) FROM COSMETICO; --! COMPROBAR
+SELECT AVG(PRECIO) FROM COSMETICO; 
 
 --? 16. Saca la media de los precios de los cosméticos cuyo código comienza por ‘C’.
-SELECT ABS(PRECIO)
+SELECT AVG(PRECIO)
 FROM COSMETICO
-    WHERE UPPER(NOMBRE) LIKE 'C%'; --! COMPROBAR
+    WHERE UPPER(NOMBRE) LIKE 'C%';
 
 --? 17. Saca un listado de NOMBRE y PRECIO de aquellos cosméticos que en su NOMBRE incluyan ‘ANTI’.
+SELECT NOMBRE, PRECIO
+FROM COSMETICO
+    WHERE UPPER(NOMBRE) LIKE '%ANTI%';
 
 --? 18. Dime el total de dinero de las VENTAS que se ha invertido en COMISIONES.
 
 --? 19. Cuenta el número de VENTAS que han tenido COMISIÓN.
+SELECT COUNT(*)
+FROM VENTA
+    WHERE COMISION > 0;
 
 --? 20. Saca un listado de COSMÉTICOS con el 20% de descuento en todos ellos. 
---?     Debes mostrar el NOMBRE, PRECIO, PRECIO20% de descuento.
+--?     Debes mostrar el NOMBRE, PRECIO, PRECIO 20% de descuento.
+SELECT NOMBRE, PRECIO, PRECIO * 0.8 AS PRECIO_DESCUENTO
+FROM COSMETICO;
