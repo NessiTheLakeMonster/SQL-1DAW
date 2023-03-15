@@ -165,9 +165,17 @@ ON REPARTIDOR.COD_ZONA = ZONA.COD
 ORDER BY REPARTIDOR.NOMBRE; -- ordenado por nombre de repartidor
     
 --? 5. Saca un listado ordenado por nombre de zona y el número total de repartidores que tiene.
-SELECT 
+SELECT ZONA.NOMBRE, COUNT(*) AS TOTAL_REPARTIDORES
+FROM ZONA JOIN REPARTIDOR
+ON ZONA.COD = REPARTIDOR.COD_ZONA
+GROUP BY ZONA.NOMBRE;
 
 --? 6. Saca el número de repartidores que tiene la zona ‘norte’.
+SELECT ZONA.NOMBRE, COUNT(*) AS TOTAL_REPARTIDORES
+FROM ZONA JOIN REPARTIDOR
+ON ZONA.COD = REPARTIDOR.COD_ZONA
+GROUP BY ZONA.NOMBRE
+    HAVING UPPER(ZONA.NOMBRE) LIKE 'NORTE';
     
 --? 7. Saca el nombre de todos los clientes a los que les han repartido repartidores de la zona ‘norte’. 
 --     (Cuidado con lo que se llamen igual, no tienen porque ser la misma persona, usa DISTINCT si es necesario) . 
