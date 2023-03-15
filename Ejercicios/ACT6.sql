@@ -9,6 +9,7 @@
     DROP TABLE SERVICIO;
     DROP TABLE EMPLEADO;
     DROP TABLE CLIENTE;
+
     --CLIENTES DE MI NEGOCIO DE ESTÉTICA
     CREATE TABLE CLIENTE(
         DNI VARCHAR2(12) PRIMARY KEY,
@@ -33,11 +34,11 @@
         NOMBRE VARCHAR2(30),
         ESPECIALIDAD VARCHAR2(30)
     );
-    INSERT INTO EMPLEADO VALUES('70898989S', 'ÁNGELA', 'PELUQUERÍA');
-    INSERT INTO EMPLEADO VALUES('70868686L', 'Sandra', 'PELUQUERÍA');
+    INSERT INTO EMPLEADO VALUES('70898989S', '�?NGELA', 'PELUQUER�?A');
+    INSERT INTO EMPLEADO VALUES('70868686L', 'Sandra', 'PELUQUER�?A');
     INSERT INTO EMPLEADO VALUES('72312222R', 'ANA', 'ESTÉTICA');
-    INSERT INTO EMPLEADO VALUES('05965433M', 'ANTONIO', 'PELUQUERÍA');
-    INSERT INTO EMPLEADO VALUES('05933333S', 'SOFÍA', 'ESTÉTICA');
+    INSERT INTO EMPLEADO VALUES('05965433M', 'ANTONIO', 'PELUQUER�?A');
+    INSERT INTO EMPLEADO VALUES('05933333S', 'SOF�?A', 'ESTÉTICA');
     --SERVICIOS QUE SE PRESTAN EN EL SAL�N DE BELLEZA
     CREATE TABLE SERVICIO(
         COD VARCHAR2(10) PRIMARY KEY,
@@ -142,10 +143,10 @@
         DESCRIPCION VARCHAR2(100)
     );
 
-    INSERT INTO TRATAMIENTO VALUES('AL1','ALERGIA AL LÁTEX');
+    INSERT INTO TRATAMIENTO VALUES('AL1','ALERGIA AL L�?TEX');
     INSERT INTO TRATAMIENTO VALUES('AL2','ALERGIA AL TINTE');
     INSERT INTO TRATAMIENTO VALUES('DM','DERMATITIS ATÓPICA');
-    INSERT INTO TRATAMIENTO VALUES('AL3','ALERGIA AL CHAMPÚ CON QUÍMICO');
+    INSERT INTO TRATAMIENTO VALUES('AL3','ALERGIA AL CHAMPÚ CON QU�?MICO');
 
     --Tabla de tratamiento que toma alguno de nuestros clientes
     CREATE TABLE CLIENTE_TRATAMIENTO(
@@ -165,4 +166,87 @@
 -- ! Fin del script
 
 -------------------------------------------------------------------------------------------
- --? 1. Saca un listado de los NOMBRES de los clientes que han comprado cosméticos, ordena alfabéticamente.
+--? 1. Saca un listado de los NOMBRES de los clientes que han comprado cosméticos, ordena alfabéticamente.
+SELECT CLIENTE.NOMBRE 
+FROM CLIENTE JOIN VENTA
+ON CLIENTE.DNI = VENTA.DNI_CLIENTE
+    WHERE UPPER(venta.cod_cosmet) LIKE 'C%' 
+    ORDER BY CLIENTE.NOMBRE ASC;
+
+--? 2. Saca un listado de los NOMBRES de los cosméticos que se han vendido, ordena alfabéticamente.
+SELECT COSMETICO.NOMBRE
+FROM COSMETICO JOIN VENTA
+ON COSMETICO.COD = VENTA.COD_COSMET
+    ORDER BY COSMETICO.NOMBRE ASC;
+
+--? 3. Saca un listado de los NOMBRES de los cosméticos que se han vendido junto al total de ellos. 
+--?    (Ten en cuenta que en una misma venta se puede vender más de un producto(existe el campo CANTIDAD)).
+SELECT COSMETICO.NOMBRE, SUM(VENTA.CANTIDAD) AS TOTAL
+FROM COSMETICO JOIN VENTA
+ON COSMETICO.COD = VENTA.COD_COSMET
+    WHERE VENTA.COD_COSMET LIKE 'C%' --! Maybe se puede con --> WHERE VENTA.COD_COSMET IS NOT NULL
+    GROUP BY COSMETICO.NOMBRE
+    ORDER BY TOTAL DESC;
+    
+--? 4. Escribe un listado de los NOMBRES de los clientes que toman tratamiento y la DESCRIPCIÓN del mismo.
+SELECT CLIENTE.NOMBRE, CLIENTE_TRATAMIENTO.COD_TRATAMIENTO, TRATAMIENTO.DESCRIPCION
+FROM CLIENTE JOIN CLIENTE_TRATAMIENTO
+ON CLIENTE.DNI = CLIENTE_TRATAMIENTO.DNI_CLIENTE
+JOIN TRATAMIENTO
+ON CLIENTE_TRATAMIENTO.COD_TRATAMIENTO = TRATAMIENTO.COD;
+    
+--? 5. Haz un listado ordenado del NOMBRE del cosmético/os cuyo precio sea el más bajo.
+SELECT NOMBRE
+FROM COSMETICO
+    WHERE PRECIO = (SELECT MIN(PRECIO) FROM COSMETICO)
+    ORDER BY NOMBRE ASC;
+    
+--? 6. Haz un listado del NOMBRE/ES del cosmético/os cuyo precio sea igual que el del precio de ‘TINTE RUBIO’.
+SELECT NOMBRE
+FROM COSMETICO
+    WHERE PRECIO = (SELECT PRECIO FROM COSMETICO
+        WHERE UPPER(NOMBRE) LIKE 'TINTE RUBIO')
+    ORDER BY NOMBRE ASC;
+
+--? 7. Haz un listado de los NOMBRES de los CLIENTES junto con el NOMBRE del empleado que le ha atendido.
+SELECT CLIENTE.NOMBRE AS CLIENTE, EMPLEADO.NOMBRE AS EMPLEADO
+FROM CLIENTE JOIN CITA
+ON CLIENTE.DNI = CITA.DNI_CLIENTE
+JOIN EMPLEADO
+ON CITA.DNI_EMPLEADO = EMPLEADO.DNI;
+    
+--? 8. Haz un listado de los NOMBRES de los CLIENTES junto con el SERVICIO que se ha hecho o que se hará.
+SELECT CLIENTE.NOMBRE,TRATAMIENTO.DESCRIPCION
+FROM CLIENTE JOIN CLIENTE_TRATAMIENTO
+ON CLIENTE.DNI = CLIENTE_TRATAMIENTO.DNI_CLIENTE
+JOIN TRATAMIENTO
+ON CLIENTE_TRATAMIENTO.COD_TRATAMIENTO = TRATAMIENTO.COD;
+
+--? 9. Haz un listado de los NOMBRES de los cosméticos que se ha comprado un cliente y el nombre del 
+--?    empleado que se lo vendió. Listado con NOMBRE del empleado, NOMBRE del cliente y NOMBRE del cosmético.
+SELECT EMPLEADO.NOMBRE, CLIENTE.NOMBRE, COSMETICO.NOMBRE
+FROM EMPLEADO JOIN VENTA
+ON EMPLEADO.DNI = VENTA.DNI_EMPLEADO
+JOIN CLIENTE
+ON CLIENTE.DNI = VENTA.DNI_EMPLEADO
+JOIN COSMETICO 
+ON COSMETICO.COD = VENTA.COD_COSMET;
+    
+--? 10. Haz un listado de todos los datos de aquellos clientes que no sean ni PROFESOR, ni CONDUCTOR. 
+--?     (Da igual el sexo de la persona).
+    
+--? 11. Saca un listado de los nombres de los SERVICIOS que tenemos citados ordenado por fecha.
+    
+--? 12. Saca un listado de todos los SERVICIOS de la peluquería cuyo precio esté entre 5 y 15 euros.
+    
+--? 13. Saca un listado de los NOMBRES que se han hecho algún SERVICIO cuyo precio esté 
+--?     comprendido entre 10 y 15 euros.
+
+--? 14. Saca un listado de los NOMBRES de los cosméticos cuyo precio sea menor de 15 euros.
+
+--? 15. Saca un listado de los NOMBRES de los clientes que han comprado algún 
+--?     cosmético por valor menor de 15 euros.
+
+--? 16. Saca un listado del número de CLIENTES que tenemos de cada PROFESIÓN.
+    
+--? 17. Saca un listado del número de EMPLEADOS que tenemos de cada ESPECIALIDAD.
