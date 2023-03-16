@@ -178,8 +178,9 @@ GROUP BY ZONA.NOMBRE
     HAVING UPPER(ZONA.NOMBRE) LIKE 'NORTE';
     
 --? 7. Saca el nombre de todos los clientes a los que les han repartido repartidores de la zona ‘norte’. 
---     (Cuidado con lo que se llamen igual, no tienen porque ser la misma persona, usa DISTINCT si es necesario) . 
---     Ordena por NOMBRE de cliente.
+--?   (Cuidado con lo que se llamen igual, no tienen porque ser la misma persona, usa DISTINCT si es necesario) . 
+--?    Ordena por NOMBRE de cliente.
+SELECT DISTINCT(CLIENTE.NOMBRE), 
     
 --? 8. Saca el número de veces que a un cliente le han repartido repartidores de la zona ‘norte’ 
 --     junto con el nombre del cliente.
