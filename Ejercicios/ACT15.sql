@@ -2,44 +2,46 @@
 
 --! Script de Alicia
 CREATE TABLE Actores (
-	CÛdigo number(4),
+	C√≥digo number(4),
 	Nombre VARCHAR(50) NOT NULL,
 	F_nacimiento DATE default sysdate NOT NULL,
-	Nacionalidad VARCHAR(25)DEFAULT 'EspaÒa' NOT NULL ,
-	CONSTRAINT pk_actores PRIMARY KEY (CÛdigo),
+	Nacionalidad VARCHAR(25)DEFAULT 'Espa√±a' NOT NULL ,
+	CONSTRAINT pk_actores PRIMARY KEY (C√≥digo),
   constraint uk_actores unique(nombre)
  );
- CREATE TABLE PelÌculas (
-	CÛdigo number(4),
-	TÌtulo VARCHAR(50) NOT NULL,
+ CREATE TABLE Pel√≠culas (
+	C√≥digo number(4),
+	T√≠tulo VARCHAR(50) NOT NULL,
 	Fecha DATE NOT NULL,
 	Presupuesto number(8,2) NOT NULL,
-	CONSTRAINT pk_peliculas PRIMARY KEY (CÛdigo)
+	CONSTRAINT pk_peliculas PRIMARY KEY (C√≥digo)
    );
+
  CREATE TABLE Reparto (
 	C_actor number(4),
 	C_pelicula number(4),
 	CONSTRAINT pk_reparto PRIMARY KEY (C_actor, C_pelicula),
-	CONSTRAINT fk_act FOREIGN KEY (C_actor) REFERENCES Actores(CÛdigo)
+	CONSTRAINT fk_act FOREIGN KEY (C_actor) REFERENCES Actores(C√≥digo)
 	ON DELETE CASCADE,
-	CONSTRAINT fk_pel FOREIGN KEY (C_pelicula) REFERENCES PelÌculas(CÛdigo)
+	CONSTRAINT fk_pel FOREIGN KEY (C_pelicula) REFERENCES Pel√≠culas(C√≥digo)
 	ON DELETE CASCADE 
  );
-INSERT INTO Actores VALUES (1, 'Paco LeÛn', '10/04/1974', DEFAULT);
+
+INSERT INTO Actores VALUES (1, 'Paco LeÔøΩn', '10/04/1974', DEFAULT);
 INSERT INTO Actores VALUES(2, 'Antonio Banderas', '10/08/1968', DEFAULT);
 INSERT INTO Actores VALUES (3, 'Fernando Tejero', '24/02/1967', DEFAULT);
 INSERT INTO Actores VALUES(4, 'Alfredo Landa', '04/03/1933', DEFAULT);
 INSERT INTO Actores VALUES(5, 'Antonio Resines', '07/08/1954', DEFAULT); 
 INSERT INTO Actores VALUES(6, 'Luis Merlo', '13/06/1966', DEFAULT);
 INSERT INTO Actores VALUES (7, 'Imanol Arias', '26/04/1956', DEFAULT);
-INSERT INTO PelÌculas VALUES (1, 'Embarazada', '01/01/2015', 50);
-INSERT INTO PelÌculas VALUES (2, '3 bodas de m·s', '01/01/2013', 20);
-INSERT INTO PelÌculas VALUES (3, 'Los m·nagers', '01/01/2006', 21);
-INSERT INTO PelÌculas VALUES (4, 'CrÛnica de un engaÒo', '01/01/2010', 15);
-INSERT INTO PelÌculas VALUES (5, 'Gato con botas', '01/01/2011', 25);
-INSERT INTO PelÌculas VALUES(6, 'Santos inocentes', '01/01/1984', 12);
-INSERT INTO PelÌculas VALUES(7, 'La flor de mi secreto', '01/01/1995', 4);
-INSERT INTO PelÌculas VALUES (8, 'La Corea', '01/01/1976', 5);
+INSERT INTO PelÔøΩculas VALUES (1, 'Embarazada', '01/01/2015', 50);
+INSERT INTO PelÔøΩculas VALUES (2, '3 bodas de mÔøΩs', '01/01/2013', 20);
+INSERT INTO PelÔøΩculas VALUES (3, 'Los mÔøΩnagers', '01/01/2006', 21);
+INSERT INTO PelÔøΩculas VALUES (4, 'CrÔøΩnica de un engaÔøΩo', '01/01/2010', 15);
+INSERT INTO PelÔøΩculas VALUES (5, 'Gato con botas', '01/01/2011', 25);
+INSERT INTO PelÔøΩculas VALUES(6, 'Santos inocentes', '01/01/1984', 12);
+INSERT INTO PelÔøΩculas VALUES(7, 'La flor de mi secreto', '01/01/1995', 4);
+INSERT INTO PelÔøΩculas VALUES (8, 'La Corea', '01/01/1976', 5);
 INSERT INTO Reparto VALUES (1, 1);
 INSERT INTO Reparto VALUES(1,2);
 INSERT INTO Reparto VALUES (1,3);
@@ -62,68 +64,68 @@ SELECT NOMBRE, F_NACIMIENTO
 FROM ACTORES
     WHERE SUBSTR(TO_CHAR(ACTORES.F_NACIMIENTO, 'YY'),1,2) BETWEEN '54' AND '68';
 
---? 4.- TÌtulos de pelÌculas con Paco LeÛn.
-SELECT PELÕCULAS.TÕTULO
+--? 4.- TÔøΩtulos de pelÔøΩculas con Paco LeÔøΩn.
+SELECT PELÔøΩCULAS.TÔøΩTULO
 FROM ACTORES JOIN REPARTO
-ON ACTORES.C”DIGO = REPARTO.C_ACTOR
-JOIN PELÕCULAS
-ON REPARTO.C_PELICULA = PELÕCULAS.C”DIGO
-    WHERE UPPER(ACTORES.NOMBRE) LIKE 'PACO LE”N';
+ON ACTORES.CÔøΩDIGO = REPARTO.C_ACTOR
+JOIN PELÔøΩCULAS
+ON REPARTO.C_PELICULA = PELÔøΩCULAS.CÔøΩDIGO
+    WHERE UPPER(ACTORES.NOMBRE) LIKE 'PACO LEÔøΩN';
 
---? 5.- Nombre de actor y n∫ de pelÌculas en que participa.
+--? 5.- Nombre de actor y nÔøΩ de pelÔøΩculas en que participa.
 SELECT ACTORES.NOMBRE, COUNT(*) AS TOTAL_PELICULAS
 FROM ACTORES JOIN REPARTO
-ON ACTORES.C”DIGO = REPARTO.C_ACTOR
-JOIN PELÕCULAS
-ON REPARTO.C_PELICULA = PELÕCULAS.C”DIGO
+ON ACTORES.C√ìDIGO = REPARTO.C_ACTOR
+JOIN PEL√çCULAS
+ON REPARTO.C_PELICULA = PEL√çCULAS.C√ìDIGO
 GROUP BY ACTORES.NOMBRE;
 
---? 6.- N∫ de pelÌculas de Alfredo Landa e Imanol Arias.
+--? 6.- NÔøΩ de pelÔøΩculas de Alfredo Landa e Imanol Arias.
 SELECT ACTORES.NOMBRE, COUNT(*)
 FROM ACTORES JOIN REPARTO
-ON ACTORES.C”DIGO = REPARTO.C_ACTOR
-JOIN PELÕCULAS
-ON REPARTO.C_PELICULA = PELÕCULAS.C”DIGO
+ON ACTORES.C√ìDIGO = REPARTO.C_ACTOR
+JOIN PEL√çCULAS
+ON REPARTO.C_PELICULA = PEL√çCULAS.C√ìDIGO
 GROUP BY ACTORES.NOMBRE
     HAVING UPPER(ACTORES.NOMBRE) IN('ALFREDO LANDA','IMANOL ARIAS');
 
---? 7.- Nombre de actores sin pelÌcula.
+--? 7.- Nombre de actores sin pelÔøΩcula.
 SELECT NOMBRE
 FROM ACTORES WHERE NOMBRE NOT IN (SELECT ACTORES.NOMBRE
     FROM ACTORES JOIN REPARTO
-    ON ACTORES.C”DIGO = REPARTO.C_ACTOR
-    JOIN PELÕCULAS
-    ON REPARTO.C_PELICULA = PELÕCULAS.C”DIGO); 
+    ON ACTORES.CÔøΩDIGO = REPARTO.C_ACTOR
+    JOIN PELÔøΩCULAS
+    ON REPARTO.C_PELICULA = PELÔøΩCULAS.CÔøΩDIGO); 
 
---? 8.- Actor + presupuesto de todas sus pelÌculas.
-SELECT ACTORES.NOMBRE, SUM(PELÕCULAS.PRESUPUESTO) AS TOTAL_PRESUPUESTO
+--? 8.- Actor + presupuesto de todas sus pelÔøΩculas.
+SELECT ACTORES.NOMBRE, SUM(PELÔøΩCULAS.PRESUPUESTO) AS TOTAL_PRESUPUESTO
 FROM ACTORES JOIN REPARTO
-ON ACTORES.C”DIGO = REPARTO.C_ACTOR
-JOIN PELÕCULAS
-ON REPARTO.C_PELICULA = PELÕCULAS.C”DIGO
+ON ACTORES.CÔøΩDIGO = REPARTO.C_ACTOR
+JOIN PELÔøΩCULAS
+ON REPARTO.C_PELICULA = PELÔøΩCULAS.CÔøΩDIGO
 GROUP BY ACTORES.NOMBRE;
 
---? 9.- Nombre actores, cÛdigo, tÌtulo y aÒo de pelÌcula entre 1976 y 1995.
-SELECT ACTORES.NOMBRE, PELÕCULAS.C”DIGO, PELÕCULAS.TÕTULO, PELÕCULAS.FECHA
+--? 9.- Nombre actores, cÔøΩdigo, tÔøΩtulo y aÔøΩo de pelÔøΩcula entre 1976 y 1995.
+SELECT ACTORES.NOMBRE, PELÔøΩCULAS.CÔøΩDIGO, PELÔøΩCULAS.TÔøΩTULO, PELÔøΩCULAS.FECHA
 FROM ACTORES JOIN REPARTO
-ON ACTORES.C”DIGO = REPARTO.C_ACTOR
-JOIN PELÕCULAS
-ON REPARTO.C_PELICULA = PELÕCULAS.C”DIGO
-    WHERE SUBSTR(TO_CHAR(PELÕCULAS.FECHA, 'YY'),1,2) BETWEEN '76' AND '95';
+ON ACTORES.CÔøΩDIGO = REPARTO.C_ACTOR
+JOIN PELÔøΩCULAS
+ON REPARTO.C_PELICULA = PELÔøΩCULAS.CÔøΩDIGO
+    WHERE SUBSTR(TO_CHAR(PELÔøΩCULAS.FECHA, 'YY'),1,2) BETWEEN '76' AND '95';
 
---? 10.- Nombre actores y n∫ de pelÌculas de los que tengan m·s de dos.
+--? 10.- Nombre actores y nÔøΩ de pelÔøΩculas de los que tengan mÔøΩs de dos.
 SELECT ACTORES.NOMBRE, 
 
---? 11.- Actualiza fecha de nacimiento de Paco LeÛn a 6/11/1974.
+--? 11.- Actualiza fecha de nacimiento de Paco LeÔøΩn a 6/11/1974.
 UPDATE ACTORES
 SET F_NACIMIENTO = '6/11/1974'
-WHERE UPPER(NOMBRE) LIKE 'PACO LE”N';
+WHERE UPPER(NOMBRE) LIKE 'PACO LEÔøΩN';
 
---? 12.- Actualiza aÒo de ëLos M·nagersí al 1/1/2005.
-UPDATE PELÕCULAS
+--? 12.- Actualiza aÔøΩo de ÔøΩLos MÔøΩnagersÔøΩ al 1/1/2005.
+UPDATE PELÔøΩCULAS
 SET FECHA = '1/1/2005'
-WHERE UPPER(TÕTULO) LIKE 'LOS M¡NAGERS';
+WHERE UPPER(TÔøΩTULO) LIKE 'LOS MÔøΩNAGERS';
 
 --? 13.- Incrementar presupuestos en 10%.
-UPDATE PELÕCULAS
+UPDATE PELÔøΩCULAS
 SET PRESUPUESTO = (PRESUPUESTO - (PRESUPUESTO * 0.1));
