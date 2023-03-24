@@ -1,218 +1,218 @@
 -- Examen Ines Maria Barrera
 
-DROP TABLE ALUMNOS;
-DROP TABLE PROFESORES;
-DROP TABLE ASIGNATURAS;
-DROP TABLE NOTAS;
+drop table alumnos;
+drop table profesores;
+drop table asignaturas;
+drop table notas;
 
-CREATE TABLE ALUMNOS
+create table alumnos
 (
-  COD_ALUMNO NUMBER(3) PRIMARY KEY,
-  NOMBRE VARCHAR2(30),
-  APE1 VARCHAR2(30),
-  APE2 VARCHAR2(30),
-  TELEFONO NUMBER(10),
-  CIUDAD VARCHAR2(30)
+  cod_alumno number(3) primary key,
+  nombre varchar2(30),
+  ape1 varchar2(30),
+  ape2 varchar2(30),
+  telefono number(10),
+  ciudad varchar2(30)
 );
 
-INSERT INTO ALUMNOS VALUES(1,'ANTONIO', 'RODRIGUEZ', 'OLMO',111111, 'PUERTOLLANO');
-INSERT INTO ALUMNOS VALUES(2,'ANA', 'SANTOS', 'SANTOS',222222, 'PUERTOLLANO');
-INSERT INTO ALUMNOS VALUES(3,'SANTIAGO', 'REDONDO', 'MORENO',333333, 'PUERTOLLANO');
-INSERT INTO ALUMNOS VALUES(4,'ANGELA', 'VELASCO', 'VELASCO',444444, 'CIUDAD REAL');
-INSERT INTO ALUMNOS VALUES(5,'PEPE', 'SANTOS', 'ROMERO',555555, 'CIIUDAD REAL');
+insert into alumnos values(1,'antonio', 'rodriguez', 'olmo',111111, 'puertollano');
+insert into alumnos values(2,'ana', 'santos', 'santos',222222, 'puertollano');
+insert into alumnos values(3,'santiago', 'redondo', 'moreno',333333, 'puertollano');
+insert into alumnos values(4,'angela', 'velasco', 'velasco',444444, 'ciudad real');
+insert into alumnos values(5,'pepe', 'santos', 'romero',555555, 'ciiudad real');
 
-CREATE TABLE PROFESORES
+create table profesores
 (
-    CODIGO VARCHAR2(4) PRIMARY KEY,
-    DNI VARCHAR2(11) UNIQUE,
-    NOMBRE VARCHAR2(30)
+    codigo varchar2(4) primary key,
+    dni varchar2(11) unique,
+    nombre varchar2(30)
 );
 
-INSERT INTO PROFESORES VALUES('P001', '59595959', 'ANTONIO');
-INSERT INTO PROFESORES VALUES('P002', '56565656', 'CARMEN');
-INSERT INTO PROFESORES VALUES('P003', '72727272', 'TERESA');
+insert into profesores values('p001', '59595959', 'antonio');
+insert into profesores values('p002', '56565656', 'carmen');
+insert into profesores values('p003', '72727272', 'teresa');
 
-CREATE TABLE  ASIGNATURAS
+create table  asignaturas
 (
-  COD_ASIG NUMBER(3) PRIMARY KEY,
-  NOMBRE  VARCHAR2(20),
-  HORAS NUMBER(2),
-  COD_PROFE VARCHAR2(4),
-  FOREIGN KEY (COD_PROFE) REFERENCES PROFESORES(CODIGO)
+  cod_asig number(3) primary key,
+  nombre  varchar2(20),
+  horas number(2),
+  cod_profe varchar2(4),
+  foreign key (cod_profe) references profesores(codigo)
 );
 
-INSERT INTO ASIGNATURAS VALUES(1,'PROGRAMACION',6, 'P001');
-INSERT INTO ASIGNATURAS VALUES(2,'BASE DE DATOS',4, 'P001');
-INSERT INTO ASIGNATURAS VALUES(3,'LENGUAJE DE MARCAS',6, 'P002');
-INSERT INTO ASIGNATURAS VALUES(4,'INGLES',5, 'P003');
+insert into asignaturas values(1,'programacion',6, 'p001');
+insert into asignaturas values(2,'base de datos',4, 'p001');
+insert into asignaturas values(3,'lenguaje de marcas',6, 'p002');
+insert into asignaturas values(4,'ingles',5, 'p003');
 
-CREATE TABLE NOTAS
+create table notas
 (
-  COD_ALUMNO NUMBER(3),
-  COD_ASIG NUMBER(3),
-  NOTA NUMBER(4,2),
-  PRIMARY KEY (COD_ALUMNO, COD_ASIG),
-  FOREIGN KEY (COD_ALUMNO) REFERENCES ALUMNOS(COD_ALUMNO) ON DELETE CASCADE,
-  FOREIGN KEY (COD_ASIG) REFERENCES ASIGNATURAS(COD_ASIG) ON DELETE CASCADE	
+  cod_alumno number(3),
+  cod_asig number(3),
+  nota number(4,2),
+  primary key (cod_alumno, cod_asig),
+  foreign key (cod_alumno) references alumnos(cod_alumno) on delete cascade,
+  foreign key (cod_asig) references asignaturas(cod_asig) on delete cascade
 );
 
 
 
-INSERT INTO NOTAS VALUES(1,1,6);
-INSERT INTO NOTAS VALUES(1,2,4);
-INSERT INTO NOTAS VALUES(1,3,2);
-INSERT INTO NOTAS VALUES(1,4,9);
+insert into notas values(1,1,6);
+insert into notas values(1,2,4);
+insert into notas values(1,3,2);
+insert into notas values(1,4,9);
 
-INSERT INTO NOTAS VALUES(2,1,5);
-INSERT INTO NOTAS VALUES(2,2,7);
-INSERT INTO NOTAS VALUES(2,3,8);
-INSERT INTO NOTAS VALUES(2,4,8);
+insert into notas values(2,1,5);
+insert into notas values(2,2,7);
+insert into notas values(2,3,8);
+insert into notas values(2,4,8);
 
-INSERT INTO NOTAS VALUES(3,1,8);
-INSERT INTO NOTAS VALUES(3,2,1);
-INSERT INTO NOTAS VALUES(3,3,5);
-INSERT INTO NOTAS VALUES(3,4,10);
+insert into notas values(3,1,8);
+insert into notas values(3,2,1);
+insert into notas values(3,3,5);
+insert into notas values(3,4,10);
 
-INSERT INTO NOTAS VALUES(4,3,2);
-INSERT INTO NOTAS VALUES(4,4,3);
+insert into notas values(4,3,2);
+insert into notas values(4,4,3);
 
-INSERT INTO NOTAS VALUES(5,1,2);
-INSERT INTO NOTAS VALUES(5,2,1);
-INSERT INTO NOTAS VALUES(5,3,1);
-INSERT INTO NOTAS VALUES(5,4,1);
+insert into notas values(5,1,2);
+insert into notas values(5,2,1);
+insert into notas values(5,3,1);
+insert into notas values(5,4,1);
 
 ------------------------------------------------------------------------------
--- EJERCICIO 1
--- SACAR LAS NOTAS MEDIAS DE TODAS LAS ASIGNATURAS AGRUPADAS POR ASIGNATURAS DE 
--- AQUELLOS ALUMNOS CUYO NOMBRE CONTENGA LA LETRA "A" Y ORDENADO POR EL NOMBRE 
--- DE LA ASIGNATURA, SIEMPRE Y CUANDO SEA MAYOR O IGUAL QUE 5.
-SELECT ASIGNATURAS.NOMBRE, AVG(NOTAS.NOTA)
-FROM ASIGNATURAS JOIN NOTAS
-ON ASIGNATURAS.COD_ASIG = NOTAS.COD_ASIG
-JOIN ALUMNOS
-ON NOTAS.COD_ALUMNO = ALUMNOS.COD_ALUMNO
-    WHERE UPPER(ALUMNOS.NOMBRE) LIKE '%A%' 
-    GROUP BY NOTAS.NOTA, ASIGNATURAS.NOMBRE
-        HAVING NOTAS.NOTA = (SELECT AVG(NOTA) FROM NOTAS
-            WHERE NOTA >= 5
-            GROUP BY NOTAS.COD_ASIG) 
-    ORDER BY ASIGNATURAS.NOMBRE;
-    
-        -- Correcion
-        SELECT ASIGNATURAS.NOMBRE, AVG(NOTAS.NOTA)
-        FROM NOTAS JOIN ASIGNATURAS
-        ON ASIGNATURAS.COD_ASIG = NOTAS.COD_ASIG
-        JOIN ALUMNOS
-        ON NOTAS.COD_ALUMNO = ALUMNOS.COD_ALUMNO
-            WHERE UPPER(ALUMNOS.NOMBRE) LIKE '%A%' 
-            GROUP BY NOTAS.COD_ASIG, ASIGNATURAS.NOMBRE
-                HAVING AVG(NOTAS.NOTA) >= 5 
-            ORDER BY ASIGNATURAS.NOMBRE;
+-- ejercicio 1
+-- sacar las notas medias de todas las asignaturas agrupadas por asignaturas de
+-- aquellos alumnos cuyo nombre contenga la letra "a" y ordenado por el nombre
+-- de la asignatura, siempre y cuando sea mayor o igual que 5.
+select asignaturas.nombre, avg(notas.nota)
+from asignaturas join notas
+on asignaturas.cod_asig = notas.cod_asig
+join alumnos
+on notas.cod_alumno = alumnos.cod_alumno
+    where upper(alumnos.nombre) like '%a%'
+    group by notas.nota, asignaturas.nombre
+        having notas.nota = (select avg(nota) from notas
+            where nota >= 5
+            group by notas.cod_asig)
+    order by asignaturas.nombre;
 
--- EJERCICIO 2
--- LISTAR EL NUMERO DE HORAS QUE CADA ALUMNO PERMANECERA EN EL INSTITUTO A LA 
--- SEMANA SABIENDO QUE EL CAMPO HORAS DE LA TABLA ASIGNATURAS SON LAS HORAS 
--- SEMANALES DE CADA ASIGNATURA, ADEMAS PONDREMOS LA "FECHA DE HOY" FORMATEADA 
--- DE ESTA MANERA "23 DE ENERO DE 2021"
-SELECT ALUMNOS.NOMBRE, TO_CHAR(SYSDATE, 'DD-MON-YYYY') AS FECHA, SUM(ASIGNATURAS.HORAS) AS HORAS_SEMANALES
-FROM ALUMNOS JOIN NOTAS
-ON ALUMNOS.COD_ALUMNO = NOTAS.COD_ALUMNO
-JOIN ASIGNATURAS
-ON NOTAS.COD_ASIG = ASIGNATURAS.COD_ASIG
-GROUP BY ALUMNOS.NOMBRE;
+        -- correcion
+        select asignaturas.nombre, avg(notas.nota)
+        from notas join asignaturas
+        on asignaturas.cod_asig = notas.cod_asig
+        join alumnos
+        on notas.cod_alumno = alumnos.cod_alumno
+            where upper(alumnos.nombre) like '%a%'
+            group by notas.cod_asig, asignaturas.nombre
+                having avg(notas.nota) >= 5
+            order by asignaturas.nombre;
 
--- EJERCICIO 3
--- QUEREMOS SABER LA NOTA MEDIA DEL ALUMNO 'ANA' Y LA DIFERENCIA QUE EXISTE 
--- CON LA NOTA MEDIA DEL ALUMNO QUE HA CONSEGUIDO LA MAS ALTA DE LA CLASE
-SELECT (SELECT MAX(AVG(NOTA)) FROM NOTAS GROUP BY NOTA) - AVG(NOTAS.NOTA) AS
-NOTA_DIFERENCIA, ALUMNOS.NOMBRE
-FROM NOTAS JOIN ALUMNOS
-ON NOTAS.COD_ALUMNO = ALUMNOS.COD_ALUMNO
-    WHERE UPPER(ALUMNOS.NOMBRE) LIKE 'ANA' 
-    GROUP BY ALUMNOS.NOMBRE;
+-- ejercicio 2
+-- listar el numero de horas que cada alumno permanecera en el instituto a la
+-- semana sabiendo que el campo horas de la tabla asignaturas son las horas
+-- semanales de cada asignatura, ademas pondremos la "fecha de hoy" formateada
+-- de esta manera "23 de enero de 2021"
+select alumnos.nombre, to_char(sysdate, 'dd-mon-yyyy') as fecha, sum(asignaturas.horas) as horas_semanales
+from alumnos join notas
+on alumnos.cod_alumno = notas.cod_alumno
+join asignaturas
+on notas.cod_asig = asignaturas.cod_asig
+group by alumnos.nombre;
 
-        -- Correcion
-        SELECT AVG(NOTAS.NOTA) - (SELECT MAX(AVG(NOTA)) FROM NOTAS GROUP BY NOTAS.COD_ALUMNO) AS
-        NOTA_DIFERENCIA, ALUMNOS.NOMBRE, AVG(NOTAS.NOTA) AS MEDIA_ANA
-        FROM NOTAS JOIN ALUMNOS
-        ON NOTAS.COD_ALUMNO = ALUMNOS.COD_ALUMNO
-            WHERE ALUMNOS.NOMBRE LIKE 'ANA' 
-            GROUP BY NOTAS.COD_ALUMNO, ALUMNOS.NOMBRE;
- 
- -- EJERCICIO 4
- -- NOMBRE DEL PROFESOR QUE IMPARTE LA ASIGNATURA QUE HA OBTENIDO LA MEJOR NOTA 
- -- MEDIA ENTRE TODOS SUS ALUMNOS. ES DECIR EL NOMBRE DEL PROFESOR CUYOS ALUMNOS 
- -- HAN OBTENIDO LOS MEJORES RESULTADOS
- SELECT PROFESORES.NOMBRE, ASIGNATURAS.NOMBRE, MAX(AVG(NOTAS.NOTA))
- FROM PROFESORES JOIN ASIGNATURAS
- ON PROFESORES.CODIGO = ASIGNATURAS.COD_PROFE 
- JOIN NOTAS
- ON ASIGNATURAS.COD_ASIG = NOTAS.COD_ASIG
- group by PROFESORES.NOMBRE, ASIGNATURAS.NOMBRE
-    HAVING NOTAS.NOTA;
-    
-        -- Correcion
-        SELECT NOTAS.COD_ASIG, ASIGNATURAS.NOMBRE, PROFESORES.NOMBRE
-        FROM NOTAS JOIN ASIGNATURAS
-        ON NOTAS.COD_ASIG = ASIGNATURAS.COD_ASIG
-        JOIN PROFESORES
-        ON ASIGNATURAS.COD_PROFE = PROFESORES.CODIGO
-        GROUP BY NOTAS.COD_ASIG, ASIGNATURAS.NOMBRE, PROFESORES.NOMBRE
-            HAVING AVG(NOTAS.NOTA) = (SELECT MAX(AVG(NOTA)) FROM NOTAS
-                GROUP BY COD_ASIG);
- 
- -- EJERCICIO 5 
- -- NOMBRES DE LOS ALUMNOS QUE ESTEN MATRICULADOS EN LAS MISMAS ASIGNATURAS QUE "ANA"
-SELECT NOTAS.COD_ALUMNO, ALUMNOS.NOMBRE
-FROM NOTAS JOIN ALUMNOS
-ON NOTAS.COD_ALUMNO = ALUMNOS.COD_ALUMNO
-WHERE NOTAS.COD_ASIG = (SELECT COD_ALUMNO FROM ALUMNOS
-WHERE UPPER(NOMBRE) LIKE'ANA')
-INTERSECT
-SELECT NOTAS.COD_ALUMNO, ALUMNOS.NOMBRE
-FROM NOTAS JOIN ALUMNOS
-ON NOTAS.COD_ALUMNO = ALUMNOS.COD_ALUMNO;
- 
- -- EJERCICIO 6
- -- LISTADO DE LOS NOMBRES DE LOS PROFESORES JUNTO CON LAS ASIGNATURAS QUE NO 
- -- HAN OBTENIDO NINGUN ALUMNO SUSPENSO
- SELECT PROFESORES.NOMBRE, ASIGNATURAS.NOMBRE
- FROM PROFESORES JOIN ASIGNATURAS
- ON PROFESORES.CODIGO = ASIGNATURAS.COD_PROFE 
- JOIN NOTAS
- ON ASIGNATURAS.COD_ASIG = NOTAS.COD_ASIG
-    WHERE NOTAS.NOTA > 5;
-    
-        -- Correcion
-        SELECT PROFESORES.NOMBRE, ASIGNATURAS.NOMBRE
-        FROM PROFESORES JOIN ASIGNATURAS
-        ON PROFESORES.CODIGO = ASIGNATURAS.COD_PROFE 
-        WHERE ASIGNATURAS.COD_ASIG NOT IN (SELECT DISTINCT NOTAS.COD_ASIG FROM NOTAS
-            WHERE NOTA < 5);
- 
- -- EJERCICIO 7
- -- QUIERO SABER SI ALGUNA NOTA DE "ANA" ES MAYOR QUE TODAS LAS NOTAS DE 
- -- "ANTONIO". EN CASO AFIRMATIVO MOSTRARA EL NOMBRE DE LA ASIGNATURA. 
- -- EN CASO NEGATIVO NO MUESTRA NADA
- SELECT ASIGNATURAS.NOMBRE
- FROM ASIGNATURAS JOIN
- 
- -- EJERCICIO 8
- -- MODIFICA LA NOTA A TODOS LOS ALUMNOS DE BASES DE DATOS PONIENDOLE LA 
- -- MISMA NOTA QUE EL ALUMNO QUE TIENE LA NOTA MAS ALTA 
- UPDATE NOTAS
- SET NOTA = (SELECT MAX(NOTA) FROM NOTAS);
- 
- -- EJERCICIO 9
- -- BORRA LOS DATOS DE TODOS LOS ALUMNOS QUE TENGAN ALGUNA ASIGNATURA SUSPENSA
- DELETE * FROM ALUMNOS JOIN NOTAS
- ON NOTAS.COD_ALUMNO = ALUMNOS.COD_ALUMNO
- WHERE NOTAS.NOTA < 5;
- 
- -- EJERCICIO 10
- -- LISTA LOS NOMBRES DE TODOS AQUELLOS ALUMNOS QUE HAN SUSPENDIDO TODAS LAS 
- -- ASIGNATURAS EN LAS QUE SE HAN MATRICULADO
- SELECT ALUMNOS.NOMBRE, NOTAS.NOTA
- FROM ALUMNOS JOIN NOTAS
- ON NOTAS.COD_ALUMNO = ALUMNOS.COD_ALUMNO
- WHERE NOTAS.NOTA < 5 AND COD_ASIG IN (1,2,3,4);
+-- ejercicio 3
+-- queremos saber la nota media del alumno 'ana' y la diferencia que existe
+-- con la nota media del alumno que ha conseguido la mas alta de la clase
+select (select max(avg(nota)) from notas group by nota) - avg(notas.nota) as
+nota_diferencia, alumnos.nombre
+from notas join alumnos
+on notas.cod_alumno = alumnos.cod_alumno
+    where upper(alumnos.nombre) like 'ana'
+    group by alumnos.nombre;
+
+        -- correcion
+        select avg(notas.nota) - (select max(avg(nota)) from notas group by notas.cod_alumno) as
+        nota_diferencia, alumnos.nombre, avg(notas.nota) as media_ana
+        from notas join alumnos
+        on notas.cod_alumno = alumnos.cod_alumno
+            where alumnos.nombre like 'ana'
+            group by notas.cod_alumno, alumnos.nombre;
+
+ -- ejercicio 4
+ -- nombre del profesor que imparte la asignatura que ha obtenido la mejor nota
+ -- media entre todos sus alumnos. es decir el nombre del profesor cuyos alumnos
+ -- han obtenido los mejores resultados
+ select profesores.nombre, asignaturas.nombre, max(avg(notas.nota))
+ from profesores join asignaturas
+ on profesores.codigo = asignaturas.cod_profe
+ join notas
+ on asignaturas.cod_asig = notas.cod_asig
+ group by profesores.nombre, asignaturas.nombre
+    having notas.nota;
+
+        -- correcion
+        select notas.cod_asig, asignaturas.nombre, profesores.nombre
+        from notas join asignaturas
+        on notas.cod_asig = asignaturas.cod_asig
+        join profesores
+        on asignaturas.cod_profe = profesores.codigo
+        group by notas.cod_asig, asignaturas.nombre, profesores.nombre
+            having avg(notas.nota) = (select max(avg(nota)) from notas
+                group by cod_asig);
+
+ -- ejercicio 5
+ -- nombres de los alumnos que esten matriculados en las mismas asignaturas que "ana"
+select notas.cod_alumno, alumnos.nombre
+from notas join alumnos
+on notas.cod_alumno = alumnos.cod_alumno
+where notas.cod_asig = (select cod_alumno from alumnos
+where upper(nombre) like'ana')
+intersect
+select notas.cod_alumno, alumnos.nombre
+from notas join alumnos
+on notas.cod_alumno = alumnos.cod_alumno;
+
+ -- ejercicio 6
+ -- listado de los nombres de los profesores junto con las asignaturas que no
+ -- han obtenido ningun alumno suspenso
+ select profesores.nombre, asignaturas.nombre
+ from profesores join asignaturas
+ on profesores.codigo = asignaturas.cod_profe
+ join notas
+ on asignaturas.cod_asig = notas.cod_asig
+    where notas.nota > 5;
+
+        -- correcion
+        select profesores.nombre, asignaturas.nombre
+        from profesores join asignaturas
+        on profesores.codigo = asignaturas.cod_profe
+        where asignaturas.cod_asig not in (select distinct notas.cod_asig from notas
+            where nota < 5);
+
+ -- ejercicio 7
+ -- quiero saber si alguna nota de "ana" es mayor que todas las notas de
+ -- "antonio". en caso afirmativo mostrara el nombre de la asignatura.
+ -- en caso negativo no muestra nada
+ select asignaturas.nombre
+ from asignaturas join
+
+ -- ejercicio 8
+ -- modifica la nota a todos los alumnos de bases de datos poniendole la
+ -- misma nota que el alumno que tiene la nota mas alta
+ update notas
+ set nota = (select max(nota) from notas);
+
+ -- ejercicio 9
+ -- borra los datos de todos los alumnos que tengan alguna asignatura suspensa
+ delete * from alumnos join notas
+ on notas.cod_alumno = alumnos.cod_alumno
+ where notas.nota < 5;
+
+ -- ejercicio 10
+ -- lista los nombres de todos aquellos alumnos que han suspendido todas las
+ -- asignaturas en las que se han matriculado
+ select alumnos.nombre, notas.nota
+ from alumnos join notas
+ on notas.cod_alumno = alumnos.cod_alumno
+ where notas.nota < 5 and cod_asig in (1,2,3,4);
