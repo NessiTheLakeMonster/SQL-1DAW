@@ -96,3 +96,8 @@ insert into inventario values (1009, 109, 0, 0, 0, sysdate);
 --    (si no se puede usar sysdate porque no sale nada se usa '22/03/2023')
 
 -- 7. Cuales son los generos mas alquilados, ordenados de mayor a menor
+
+
+
+
+

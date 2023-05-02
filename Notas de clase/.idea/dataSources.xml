@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="act_peluqueria" uuid="2a0061f2-c5b7-4c1a-9b6d-c1287c8a01ef">
+    <data-source source="LOCAL" name="@localhost" uuid="329ac86c-d5c9-4606-82f2-c2ae618b243e">
       <driver-ref>oracle.19</driver-ref>
       <synchronize>true</synchronize>
       <auto-commit>false</auto-commit>
@@ -9,7 +9,7 @@
       <jdbc-url>jdbc:oracle:thin:@localhost:1521:XE</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="@localhost" uuid="5af5140a-30c9-47c7-8e2b-16b7303c2740">
+    <data-source source="LOCAL" name="act_peluqueria" uuid="39b82747-ee0d-4213-965f-dfc160216fd1">
       <driver-ref>oracle.19</driver-ref>
       <synchronize>true</synchronize>
       <auto-commit>false</auto-commit>
@@ -17,15 +17,7 @@
       <jdbc-url>jdbc:oracle:thin:@localhost:1521:XE</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="act_supermercado" uuid="51792b2c-8902-4a80-877e-c941bd63f791">
-      <driver-ref>oracle.19</driver-ref>
-      <synchronize>true</synchronize>
-      <auto-commit>false</auto-commit>
-      <jdbc-driver>oracle.jdbc.OracleDriver</jdbc-driver>
-      <jdbc-url>jdbc:oracle:thin:@localhost:1521:XE</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="act_comercialPedido" uuid="57fe93c3-051b-4795-a091-9556c7390bb2">
+    <data-source source="LOCAL" name="act_supermercado" uuid="8fa65bfd-298b-4fee-98de-355127953a00">
       <driver-ref>oracle.19</driver-ref>
       <synchronize>true</synchronize>
       <auto-commit>false</auto-commit>

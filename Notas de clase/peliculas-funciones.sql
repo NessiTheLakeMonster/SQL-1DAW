@@ -317,3 +317,6 @@ select add_months(sysdate,12) from dual;
 
 -- extract
 select extract(MONTH from sysdate) from dual;
+
+-- CONSULTAS CORRELACCIONADAS ---------------------------------------------------------------------------------
+

@@ -21,8 +21,7 @@ insert into alumnos values(3,'santiago', 'redondo', 'moreno',333333, 'puertollan
 insert into alumnos values(4,'angela', 'velasco', 'velasco',444444, 'ciudad real');
 insert into alumnos values(5,'pepe', 'santos', 'romero',555555, 'ciiudad real');
 
-create table profesores
-(
+create table profesores (
     codigo varchar2(4) primary key,
     dni varchar2(11) unique,
     nombre varchar2(30)
