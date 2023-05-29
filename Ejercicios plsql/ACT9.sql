@@ -38,3 +38,52 @@ end tr_jornadaLaboral;
 update emple
 set apellido = 'b'
 where emp_no = '7900';
+
+-- Ejercicio 3
+create table control_antiguedad (
+    usuario varchar2(30),
+    fecha timestamp,
+    sueldo_antiguo number(7),
+    salario_nuevo number(7),
+    comision_antigua number(7),
+    comision_nueva number(7)
+);
+
+create or replace trigger tr_subirSueldoAntiguedad
+before update of salario
+on emple
+for each row
+declare
+    anios number;
+    nuevo_sueldo number;
+    nuevo_comision number;
+    fecha date;
+begin
+    select (salario * 1.02) into nuevo_sueldo
+    from emple;
+    select (comision * 1.02) into nuevo_comision
+    from emple;
+    select fecha_alt into fecha from emple;
+    
+    anios := (months_between(sysdate,fecha))/12;
+ 
+    if anios > 4 then
+        insert into control_antiguedad values (user, sysdate, :old.salario, :new.salario, :old.comision, :new.comision);
+    end if;
+    
+    exception
+    when others then
+        dbms_output.put_line('Error' || sqlerrm);
+end tr_subirSueldoAntiguedad;
+
+update emple set salario = salario * 1.02 ;
+
+-- Ejercicio 4
+create or replace trigger tr_addDepart
+before insert on depart
+for each row
+declare
+
+begin
+
+end;

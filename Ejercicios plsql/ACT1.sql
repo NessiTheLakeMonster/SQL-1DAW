@@ -149,6 +149,16 @@ end;
 select calculo_antiguedad(emp_no) from emple;
 
 
--- Ejercicio 8
+-- Ejercicio 8 
+create or replace procedure pr_multiplicar(numero1 number, numero2 number)
+as resultado number;
+begin
+    resultado := numero1 * numero2;
+    dbms_output.put_line(resultado);
+end;
+
+execute pr_multiplicar(2,4);
+
+
 
 

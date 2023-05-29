@@ -89,4 +89,27 @@ select fun_devAnios(sysdate, '02/03/2001') from dual;
 -- Ejercicio 7
 set serveroutput on;
 
+-- Ejercicio 8
+create type t_numeros is varray(5) of number;
+
+create or replace procedure suma_array(numeros in t_numeros)
+is
+    suma number := 0;
+begin
+    for i in 1..numeros.count loop
+        suma := suma + numeros(i);
+    end loop;
+    
+    dbms_output.put_line('Suma: ' || suma);
+end;
+
+declare
+    v_numeros t_numeros := t_numeros(1,2,3,4,5);
+begin
+    suma_array(v_numeros);
+end;
+
+-- Ejercicio 9
+
+
 
