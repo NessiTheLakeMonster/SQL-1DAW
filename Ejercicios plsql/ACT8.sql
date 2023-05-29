@@ -14,7 +14,10 @@ begin
     if num_empleados >= 8 then
         RAISE_APPLICATION_ERROR(-20001, 'No se puede dar de alta más de 8 empleados en el mismo departamento.');
     end if;
+ 
 end tr_maxEmpleDepartamento;
+
+insert into emple values (7005, 'BARRERA', 'VENDEDOR', 7698, sysdate, 1500, 300, 30);
 
 drop trigger tr_maxEmpleDepartamento;
 

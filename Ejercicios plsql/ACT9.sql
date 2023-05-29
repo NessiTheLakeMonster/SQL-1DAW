@@ -83,7 +83,26 @@ create or replace trigger tr_addDepart
 before insert on depart
 for each row
 declare
-
+    new_director emple.dir%type;
+    anios number;
 begin
+    select emp_no into new_director
+    from emple
+    where upper(oficio) not like 'DIRECTOR'
+    order by fecha_alt
+    fetch first 1 row only;
+    
+    update emple
+    set dir = new_director
+    where dept_no = :new.dept_no;
 
 end;
+
+insert into depart values (50, 'MARKETING', 'PUERTOLLANO');
+insert into 
+
+select emp_no 
+from emple
+where upper(oficio) not like 'DIRECTOR'
+order by fecha_alt
+fetch first 1 row only;

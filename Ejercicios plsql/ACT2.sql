@@ -8,6 +8,8 @@ as
 begin
     update emple set oficio = cadena 
     where emp_no = numero;
+    
+    dbms_output.put_line('El empleado con numero: ' || numero || ' su nuevo oficio es ' || cadena);
 end;
 
 execute pr_modOficio(7369,'EMPLEADO');
